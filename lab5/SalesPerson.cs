@@ -10,11 +10,8 @@ namespace lab5
     {
         public int AchievedTarget { get; set; }
 
-        protected virtual void OnEmployeeLayOff(EmployeeLayOffEventArgs e) {
-            Console.WriteLine("SalesPerson laying off");
+        protected override void OnEmployeeLayOff(EmployeeLayOffEventArgs e) {
             if(e.Cause == LayOffCause.MasterOfTheGameAge || e.Cause == LayOffCause.DidntAchieveTarget) {
-                Console.WriteLine($"Employee {this.EmployeeID} is laying off bacause {e.Cause}...");
-                Console.WriteLine(this);
                 base.OnEmployeeLayOff(e);
             }
         }

@@ -9,7 +9,7 @@ namespace lab5
 {
     public class Club {
         public int ClubID { get; set; }
-        public String ClubName { get; set; }
+        public String ?ClubName { get; set; }
         static List<Employee> Members = new();
         public void AddMember(Employee E) {
             ///Try Register for EmployeeLayOff Event Here //??????????????
@@ -22,7 +22,8 @@ namespace lab5
         public void RemoveMember (object sender, EmployeeLayOffEventArgs e) {
             ///Employee Will not be removed from the Club if Age>60
             ///Employee will be removed from Club if Vacation Stock < 0
-            if ((sender is Employee emp) && (Members?.Contains(emp) == true) && e.Cause == LayOffCause.NoVacationStock){
+            if ((sender is Employee emp) && (Members?.Contains(emp) == true) && 
+                (e.Cause == LayOffCause.NoVacationStock || e.Cause == LayOffCause.DidntAchieveTarget)){
                 Members.Remove(emp);
                 Console.WriteLine($"This is Club -{ClubName}-");
                 Console.WriteLine($"employee {emp.EmployeeID} has been removed from the club\n\n");
